@@ -12,7 +12,6 @@ exec ros -Q -L sbcl-bin -m samarang -- $0 "$@"
   (:use :cl))
 (in-package :ros.script.samarang.3805107177)
 
-#+ros.installing
 (eval-when (:load-toplevel)
   (setf ros.install:*build-hook*
         (lambda ()
