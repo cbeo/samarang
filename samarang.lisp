@@ -45,10 +45,11 @@
                 string)))
 
 (defun load-wordset ()
-  (with-open-file (input +wordset-file+)
-    (loop :for line = (read-line input nil nil)
-          :while line
-          :do (setf (gethash (clean-string line) *wordset*) t))))
+  (let ((wordset-path (merge-pathnames (asdf:system-source-directory :samarang) +wordset-file+)))
+    (with-open-file (input wordset-path)
+      (loop :for line = (read-line input nil nil)
+         :while line
+         :do (setf (gethash (clean-string line) *wordset*) t)))))
 
 
 (defun anagrams-of (word &optional (output *standard-output*))
