@@ -6,6 +6,7 @@ exec ros -Q -L sbcl-bin -m samarang -- $0 "$@"
 (progn ;;init forms
   (ros:ensure-asdf)
   #+quicklisp(ql:quickload '(:samarang) :silent t)
+  (samarang::load-wordset)
   )
 
 (defpackage :ros.script.samarang.3805107177
@@ -13,9 +14,7 @@ exec ros -Q -L sbcl-bin -m samarang -- $0 "$@"
 (in-package :ros.script.samarang.3805107177)
 
 (eval-when (:load-toplevel :compile-toplevel)
-  (setf ros:*build-hook*
-        (lambda ()
-          (samarang::load-wordset))))
+  )
 
 (defun main (&rest argv)
   (unless (= 1 (length argv))
