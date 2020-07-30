@@ -5,14 +5,15 @@ exec ros -Q  -m samarang -L sbcl-bin  -- $0 "$@"
 |#
 (progn ;;init forms
   (ros:ensure-asdf)
-  #+quicklisp(ql:quickload '(:samarang) :silent t)
-  )
+  (ql:quickload '(:samarang) :silent t)
+  (when (find :roswell.dump.executable *features*)
+    (samarang::load-wordset)))
 
 (defpackage :ros.script.samarang.3805107177
   (:use :cl))
 (in-package :ros.script.samarang.3805107177)
 
-(samarang::load-wordset)
+
 
 (defun main (&rest argv)
   (unless (= 1 (length argv))
