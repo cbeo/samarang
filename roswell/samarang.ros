@@ -1,19 +1,18 @@
 #!/bin/sh
 #|-*- mode:lisp -*-|#
 #|
-exec ros -Q  -m samarang -L sbcl-bin  -- $0 "$@"
+exec ros -Q  -L sbcl-bin  -- $0 "$@"
 |#
 (progn ;;init forms
   (ros:ensure-asdf)
-  (ql:quickload '(:samarang) :silent t)
-  (when (find :roswell.dump.executable *features*)
-    (samarang::load-wordset)))
+  (ql:quickload '(:samarang) :silent t))
 
 (defpackage :ros.script.samarang.3805107177
   (:use :cl))
 (in-package :ros.script.samarang.3805107177)
 
-
+(print "about to load wordset")
+(samarang::load-wordset)
 
 (defun main (&rest argv)
   (unless (= 1 (length argv))
